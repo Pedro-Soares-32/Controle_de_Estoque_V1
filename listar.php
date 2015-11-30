@@ -1,6 +1,7 @@
 <?php 
     include_once 'php/Global.php';
     include_once 'php/produto.php';
+    excluir_por_id();
 ?>
 <!DOCTYPE html>
 <html>
