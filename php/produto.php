@@ -49,4 +49,50 @@ function excluir_por_id() {
     }
 }
 
+function editar_por_id() {
+    if(isset($_GET['editar'])){
+        $id = $_GET['editar'];
+        $SQL = "SELECT * FROM Produto WHERE id=:ID;";
+        $prepare = conexao()->prepare($SQL);
+        $prepare->bindValue(":ID", $id);
+        $prepare->execute();
+        while ($linha = $prepare->fetch(PDO::FETCH_ASSOC)) {
+            ?>
+                <form method="post">
+                    <input type="hidden" name="editar" value="<?= $linha['id'] ?>" /> 
+                    Nome: 
+                    <input value="<?= $linha['nome'] ?>" type="text" name="nome" /><br/>
+                    Valor: 
+                    <input value="<?= $linha['valor'] ?>" type="text" name="valor" /><br/>
+                    Quantidade: 
+                    <input value="<?= $linha['qtd'] ?>" type="text" name="qtd" /><br/>
+                    Data de Validade: 
+                    <input value="<?= $linha['data_validade'] ?>" type="text" name="dtVal" /><br/>
+                    <input type="submit" value="Editar" />
+                </form>
+            <?php
+        }
+    }
+}
+
+
+function editar() {
+    if(
+        isset($_POST['editar']) and
+        isset($_POST['nome']) and
+        isset($_POST['valor']) and
+        isset($_POST['qtd']) and
+        isset($_POST['dtVal'])
+    ){
+        $SQL = "UPDATE `produto` SET nome=:nome, valor=:valor, qtd=:qtd, data_validade=:data_validade WHERE `id`=:ID;";
+        $prepare = conexao()->prepare($SQL);
+        $prepare->bindValue(":nome", $_POST['nome']);
+        $prepare->bindValue(":valor", $_POST['valor']);
+        $prepare->bindValue(":qtd", $_POST['qtd']);
+        $prepare->bindValue(":data_validade", $_POST['dtVal']);
+        $prepare->bindValue(":ID", $_POST['editar']);
+        $prepare->execute();
+    }
+}
+
 //https://github.com/Pedro-Soares-32/Controle_de_Estoque_V1
