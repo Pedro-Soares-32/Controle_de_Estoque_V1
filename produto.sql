@@ -1,30 +1,9 @@
--- phpMyAdmin SQL Dump
--- version 4.0.4.2
--- http://www.phpmyadmin.net
---
--- Máquina: localhost
--- Data de Criação: 30-Nov-2015 às 17:29
--- Versão do servidor: 5.6.13
--- versão do PHP: 5.4.17
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
+CREATE DATABASE IF NOT EXISTS `database` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `database`;
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
---
--- Base de Dados: `database`
---
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `produto`
---
 
 CREATE TABLE IF NOT EXISTS `produto` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -33,8 +12,27 @@ CREATE TABLE IF NOT EXISTS `produto` (
   `qtd` int(11) NOT NULL,
   `data_validade` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+INSERT INTO `produto` (`id`, `nome`, `valor`, `qtd`, `data_validade`) VALUES
+(2, 'aaaaaaa', 22, 22, '22/22/2222'),
+(3, 'Sou lindo e gostoso', 22, 22, '22/22/2222'),
+(4, 'aaaa', 22, 22, '22/22/2222'),
+(5, 'Arroz', 22, 22, '22/22/2222'),
+(6, 'Arroz', 22, 22, '22/22/2222'),
+(7, 'Arroz', 22, 22, '22/22/2222'),
+(8, 'Arroz', 22, 22, '22/22/2222'),
+(9, 'Arroz', 22, 22, '22/22/2222'),
+(10, 'Arroz', 22, 22, '22/22/2222'),
+(11, 'Arroz', 22, 22, '22/22/2222'),
+(12, 'Arroz', 22, 22, '22/22/2222'),
+(13, 'Arroz', 22, 22, '22/22/2222');
+
+CREATE TABLE IF NOT EXISTS `usuario` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `senha` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
