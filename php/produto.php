@@ -84,7 +84,8 @@ function editar() {
         isset($_POST['qtd']) and
         isset($_POST['dtVal'])
     ){
-        $SQL = "UPDATE `produto` SET nome=:nome, valor=:valor, qtd=:qtd, data_validade=:data_validade WHERE `id`=:ID;";
+        $SQL = "UPDATE `produto` SET nome=:nome, valor=:valor, "
+                . "qtd=:qtd, data_validade=:data_validade WHERE `id`=:ID;";
         $prepare = conexao()->prepare($SQL);
         $prepare->bindValue(":nome", $_POST['nome']);
         $prepare->bindValue(":valor", $_POST['valor']);
