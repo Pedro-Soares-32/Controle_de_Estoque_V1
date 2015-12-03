@@ -1,6 +1,10 @@
 <?php 
     include_once 'php/Global.php';
     include_once 'php/produto.php';
+    include_once 'php/usuario.php';
+    if(!estaLogado()){
+        header("Location: /login.php");
+    }
     salvar();
 ?>
 <!DOCTYPE html>
