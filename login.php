@@ -4,7 +4,7 @@
     if(estaLogado()){
         header("Location: /index.php");
     }
-    entrar();
+    $erro = entrar();
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,6 +13,7 @@
         <title></title>
     </head>
     <body>
+        <h2><?= (isset($erro)? $erro : "") ?></h2>
         <form method="post">
             email: <input type="text" name="email" />
             senha: <input type="password" name="senha" />

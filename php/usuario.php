@@ -28,7 +28,7 @@ function entrar() {
             $_SESSION['usuario'] = $prepare->fetch(PDO::FETCH_ASSOC);
             header("Location: /index.php");
         }else{
-            $erro = "Deu merda!";
+            return "Deu merda!";
         }
     }
 }
