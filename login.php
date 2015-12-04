@@ -14,6 +14,13 @@
     </head>
     <body>
         <h2><?= (isset($erro)? $erro : "") ?></h2>
+        <?php
+            if(isset($erro)){
+                echo "<script>";
+                echo "alert('{$erro}');";
+                echo "</script>";
+            }
+        ?>
         <form method="post">
             email: <input type="text" name="email" />
             senha: <input type="password" name="senha" />

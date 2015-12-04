@@ -22,6 +22,32 @@ function salvar() {
     }
 }
 
+function procurar() {
+    if(
+        isset($_POST['nome']) or
+        isset($_POST['valor'])
+    ){
+        $nome = (isset($_POST['nome'])? $_POST['nome'] : "");
+        $valor = (isset($_POST['valor'])? $_POST['valor'] : "");
+        
+        $SQL = "Select * from Produto WHERE nome=:nome or valor=:valor;";
+        $preparo = conexao()->prepare($SQL);
+        $preparo->bindValue(":nome", $nome);
+        $preparo->bindValue(":valor", $valor);
+        $preparo->execute();
+        while($linha = $preparo->fetch(PDO::FETCH_ASSOC)){
+            echo "<tr>";
+            echo "<td><a href='?excluir={$linha['id']}'>Excluir</a></td>";
+            echo "<td><a href='?editar={$linha['id']}'>Editar</a></td>";
+            echo "<td>".$linha['nome']."</td>";
+            echo "<td>".$linha['valor']."</td>";
+            echo "<td>".$linha['qtd']."</td>";
+            echo "<td>".$linha['data_validade']."</td>";
+            echo "</tr>";
+        }
+    }
+}
+
 function listar() {
     $SQL = "Select * from Produto WHERE 1;";
     $preparo = conexao()->prepare($SQL);
@@ -42,6 +68,21 @@ function listar() {
 function excluir_por_id() {
     if(isset($_GET['excluir'])){
         $id = $_GET['excluir'];
+        
+        $SQL_SELECT = "SELECT * FROM Produto WHERE id=:ID;";
+        $prepare_select = conexao()->prepare($SQL_SELECT);
+        $prepare_select->bindValue(":ID", $id);
+        $prepare_select->execute();
+        $resultado = $prepare_select->fetch(PDO::FETCH_ASSOC);
+        
+        $SQL_INSERT = "INSERT INTO `historico`(`nome`, `valor`, `qtd`, `data_validade`) VALUES (:nome, :valor, :qtd, :dtVal);";
+        $preparo_insert = conexao()->prepare($SQL_INSERT);
+        $preparo_insert->bindValue(":nome", $resultado['nome']);
+        $preparo_insert->bindValue(":valor", $resultado['valor']);
+        $preparo_insert->bindValue(":qtd", $resultado['qtd']);
+        $preparo_insert->bindValue(":dtVal", $resultado['data_validade']);
+        $preparo_insert->execute();
+        
         $SQL = "DELETE FROM Produto WHERE id=:ID;";
         $prepare = conexao()->prepare($SQL);
         $prepare->bindValue(":ID", $id);
